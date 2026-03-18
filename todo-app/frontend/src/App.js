@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -17,6 +18,8 @@ function App() {
   }, []);
 
   const addTask = async () => {
+    if (!task) return;
+
     await fetch(`${API}/tasks`, {
       method: "POST",
       headers: {
@@ -38,25 +41,28 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>To-Do App</h1>
+    <div className="container">
+      <div className="card">
+        <h1>✨ My To-Do List</h1>
 
-      <input
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter task"
-      />
+        <div className="input-section">
+          <input
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+            placeholder="Enter a task..."
+          />
+          <button onClick={addTask}>Add</button>
+        </div>
 
-      <button onClick={addTask}>Add</button>
-
-      <ul>
-        {tasks.map((t, index) => (
-          <li key={index}>
-            {t.task}
-            <button onClick={() => deleteTask(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+        <ul>
+          {tasks.map((t, index) => (
+            <li key={index}>
+              <span>{t.task}</span>
+              <button onClick={() => deleteTask(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
