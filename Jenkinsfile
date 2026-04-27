@@ -4,25 +4,29 @@ pipeline {
         nodejs 'NodeJS'
     }
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/sonamchokss/sonamchoki_02240361_DSO101_A1'
             }
         }
+
         stage('Install') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
+
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
+
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
             post {
                 always {
@@ -30,14 +34,11 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
-                script {
-                    docker.build('sonamchokss/node-app:latest')
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-                        docker.image('sonamchokss/node-app:latest').push()
-                    }
-                }
+                bat 'docker build -t sonamchokss/node-app:latest .'
+                bat 'docker push sonamchokss/node-app:latest'
             }
         }
     }
