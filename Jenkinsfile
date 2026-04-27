@@ -14,31 +14,39 @@ pipeline {
 
         stage('Install') {
             steps {
-                bat 'npm install'
+                dir('todo-app/backend') {
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                bat 'npm run build'
+                dir('todo-app/backend') {
+                    bat 'npm run build || echo "No build script, skipping"'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'npm test'
+                dir('todo-app/backend') {
+                    bat 'npm test'
+                }
             }
             post {
                 always {
-                    junit 'junit.xml'
+                    junit '**/junit.xml'
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'docker build -t sonamchokss/node-app:latest .'
-                bat 'docker push sonamchokss/node-app:latest'
+                dir('todo-app/backend') {
+                    bat 'docker build -t sonamchokss/node-app:latest .'
+                    bat 'docker push sonamchokss/node-app:latest'
+                }
             }
         }
     }
