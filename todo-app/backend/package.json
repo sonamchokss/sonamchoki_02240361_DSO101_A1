@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "jest --ci --reporters=default --reporters=jest-junit",
-    "build": "node server.js || echo skipping"
-  },
+    "build": "echo Build complete"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
