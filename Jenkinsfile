@@ -44,8 +44,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 dir('todo-app/backend') {
-                    bat 'docker build -t sonamchokss/node-app:latest .'
-                    bat 'docker push sonamchokss/node-app:latest'
+                    withCredentials([usernamePassword(
+                        credentialsId: 'docker-hub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )]) {
+                        bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+                        bat 'docker build -t sonamchokss/node-app:latest .'
+                        bat 'docker push sonamchokss/node-app:latest'
+                        bat 'docker logout'
+                    }
                 }
             }
         }
