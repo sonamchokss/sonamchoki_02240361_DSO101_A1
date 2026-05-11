@@ -58,8 +58,7 @@ todo-app
 - Created backend API using Express
 - Used environment variables for configuration
 
-![alt text](screenshots/local-app.png)
-
+![alt text](todo-app/screenshots/local-app.png)
 ---
 
 ### Step 2: Dockerization
@@ -76,11 +75,11 @@ docker build -t sonamchokss/fe-todo:02240361 .
 - Pushed images:
 
 Frontend:
-![alt text](screenshots/docker-hub1.png)
+![alt text](todo-app/screenshots/docker-hub1.png)
 Backend:
-![alt text](screenshots/docker-hub2.png)
+![alt text](todo-app/screenshots/docker-hub2.png)
 
-![alt text](screenshots/docker-hub.png)
+![alt text](todo-app/screenshots/docker-hub.png)
 
 ---
 
@@ -90,12 +89,12 @@ Backend:
 - Configured environment variables
 
 Frontend URL: https://fe-todo-02240361.onrender.com
-![alt text](screenshots/render1.png)
+![alt text](todo-app/screenshots/render1.png)
+
 Backend URL: https://be-todo-02240361.onrender.com
-![alt text](screenshots/render2.png)
+![alt text](todo-app/screenshots/render2.png)
 
-![alt text](screenshots/render.png)
-
+![alt text](todo-app/screenshots/render.png)
 ---
 
 ### Step 5: Testing
@@ -104,7 +103,7 @@ Backend URL: https://be-todo-02240361.onrender.com
   - Task deletion
   - API connectivity
 
-![alt text](screenshots/live-app.png)
+![alt text](todo-app/screenshots/live-app.png)
 
 ---
 
